@@ -30,6 +30,24 @@ namespace Instituto.Controladores
             return this.Materias;
         }
 
+        public List<Alumno> GetAlumnos(long idMateria)
+        {
+            return Materias.FirstOrDefault(m => m.Id == idMateria).Alumnos;
+
+            // return Materias.Where(m => m.Id == idMateria).Select(s=> s.Insciptos).FirstOrDefault();
+
+            //var alumnos = new List<Alumno>();
+
+            //foreach (Materia m in Materias)
+            //{
+            //    if (m.Id == idMateria)
+            //    {
+            //        alumnos = m.Insciptos;
+            //    }
+            //}
+            //return alumnos;
+        }
+
         private void LoadAlumnos()
         {
             Alumnos.Add(new Alumno() { Id = 1, Nombre = "Manolo Lamas", FechaNacimiento = new DateTime(1987, 01, 23) });
@@ -39,11 +57,27 @@ namespace Instituto.Controladores
                 Nombre = "Paco gonzalez",
                 FechaNacimiento = new DateTime(1990, 07, 13)
             });
+            Alumnos.Add(new Alumno()
+            {
+                Id = 3,
+                Nombre = "Ana Perez",
+                FechaNacimiento = new DateTime(1992, 06, 03)
+            });
         }
         private void LoadMaterias()
         {
-            Materias.Add(new Materia() { Id = 1, Nombre = "Física" });
-            Materias.Add(new Materia() { Id = 2, Nombre = "Matemáticas" });
+            Materias.Add(new Materia()
+            {
+                Id = 1,
+                Nombre = "Física",
+                Alumnos = { Alumnos[0], Alumnos[1] }
+            });
+            Materias.Add(new Materia()
+            {
+                Id = 2,
+                Nombre = "Matemáticas",
+                Alumnos = { Alumnos[1], Alumnos[2] }
+            });
         }
 
     }

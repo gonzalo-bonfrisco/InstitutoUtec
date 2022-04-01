@@ -11,6 +11,13 @@ namespace Instituto.Entidades
         public long Id { get; set; }
         public string Nombre { get; set; }
 
+        public List<Alumno> Alumnos { get; set; }
+
+        public Materia()
+        {
+            Alumnos = new List<Alumno>();
+        }
+
         public override string ToString()
         {
             return $"{this.Id} - {this.Nombre} ";
