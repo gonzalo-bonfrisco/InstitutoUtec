@@ -34,6 +34,7 @@ namespace Instituto.Controladores
         {
             return Materias.FirstOrDefault(m => m.Id == idMateria).Alumnos;
 
+            #region CodigoComentado
             // return Materias.Where(m => m.Id == idMateria).Select(s=> s.Insciptos).FirstOrDefault();
 
             //var alumnos = new List<Alumno>();
@@ -46,6 +47,16 @@ namespace Instituto.Controladores
             //    }
             //}
             //return alumnos;
+            #endregion
+        }
+
+        public List<Materia> GetMaterias(long idAlumno)
+        {
+            // var alumno = Alumnos.FirstOrDefault(a => a.Id == idAlumno);
+            //return Materias.Where(m => m.Alumnos.Contains(alumno)).ToList();
+
+            return Materias.Where(m => m.Alumnos.Any(a => a.Id == idAlumno)).ToList();
+
         }
 
         private void LoadAlumnos()
