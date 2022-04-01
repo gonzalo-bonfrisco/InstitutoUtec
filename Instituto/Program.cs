@@ -57,7 +57,17 @@ namespace Instituto
         }
         private static string GetMaterias()
         {
-            return "Materias";
+            InstitutoController controller = new InstitutoController();
+
+            var materias = controller.GetMaterias();
+            string resultado = string.Empty;
+
+            materias.ForEach(a =>
+            {
+                resultado += $"\n {a.ToString()}";
+            });
+
+            return resultado;
         }
         private static void GoToMenu()
         {

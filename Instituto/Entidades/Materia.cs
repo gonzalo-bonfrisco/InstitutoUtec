@@ -10,5 +10,10 @@ namespace Instituto.Entidades
     {
         public long Id { get; set; }
         public string Nombre { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Id} - {this.Nombre} ";
+        }
     }
 }
