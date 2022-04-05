@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Materias>
+	<Materia>
+		<Id>1</Id>
+		<Nombre>Física</Nombre>
+		<Alumnos>1|2</Alumnos>
+	</Materia>
+	<Materia>
+		<Id>2</Id>
+		<Nombre>Matemáticas</Nombre>
+		<Alumnos>2</Alumnos>
+	</Materia>
+</Materias>

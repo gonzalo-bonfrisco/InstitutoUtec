@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace Instituto.Controladores
 {
     public class InstitutoController
@@ -14,6 +16,7 @@ namespace Instituto.Controladores
 
         public InstitutoController()
         {
+
             Alumnos = new List<Alumno>();
             Materias = new List<Materia>();
 

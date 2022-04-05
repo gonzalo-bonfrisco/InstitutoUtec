@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Alumnos>
+	<Alumno>
+		<Id>1</Id>
+		<Nombre>Pepe</Nombre>
+		<FechaNacimiento>2000-12-01</FechaNacimiento>
+	</Alumno>
+	<Alumno>
+		<Id>2</Id>
+		<Nombre>Pepe</Nombre>
+		<FechaNacimiento>2000-11-09</FechaNacimiento>
+	</Alumno>
+</Alumnos>

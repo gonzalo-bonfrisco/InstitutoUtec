@@ -82,7 +82,8 @@ namespace Instituto
         public static string GetAlumnos()
         {
 
-            InstitutoController controller = new InstitutoController();
+            //InstitutoController controller = new InstitutoController();
+            InstitutoXMLController controller = new InstitutoXMLController();
 
             var alumnos = controller.GetAlumnos();
 
