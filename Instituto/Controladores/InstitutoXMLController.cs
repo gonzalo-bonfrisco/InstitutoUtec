@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Instituto.Controladores
 {
@@ -71,6 +72,20 @@ namespace Instituto.Controladores
         public List<Materia> GetMaterias(long idAlumno)
         {
             return this.GetMaterias().Where(m => m.Alumnos.Any(a => a.Id == idAlumno)).ToList();
+        }
+
+        public void CreateAlumno(Alumno alumno)
+        {
+            var document = provider.GetDocument(XMLEnum.Alumnos);
+
+            document.Root.Add(new XElement("Alumno",
+                                   new XElement("Id", alumno.Id),
+                                   new XElement("Nombre", alumno.Nombre),
+                                   new XElement("FechaNacimiento", alumno.FechaNacimiento)
+                             )
+            );
+
+            provider.SaveDocument(document, XMLEnum.Alumnos);
         }
 
     }

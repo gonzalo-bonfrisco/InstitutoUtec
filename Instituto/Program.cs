@@ -65,6 +65,16 @@ namespace Instituto
                         _opcion = Console.ReadLine();
 
                         break;
+                    case "5":
+                        InstitutoXMLController controller = new InstitutoXMLController();
+                        controller.CreateAlumno(new Alumno()
+                        {
+                            Id = 89,
+                            Nombre = "Prueba",
+                            FechaNacimiento = DateTime.Now
+                        });
+                        GoToMenu();
+                        break;
                     default:
 
                         Console.Write("Opción inválida.");
@@ -166,6 +176,7 @@ namespace Instituto
             Console.WriteLine("2 - Listado de Materias");
             Console.WriteLine("3 - Listado de Alumnos por Materia");
             Console.WriteLine("4 - Listado de Materias por Alumno");
+            Console.WriteLine("5 - Nuevo Alumno");
             Console.WriteLine("");
             Console.WriteLine("Ingrese una opción:");
             _opcion = Console.ReadLine();

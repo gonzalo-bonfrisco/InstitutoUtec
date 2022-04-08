@@ -1,13 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Alumnos>
-	<Alumno>
-		<Id>1</Id>
-		<Nombre>Pepe</Nombre>
-		<FechaNacimiento>2000-12-01</FechaNacimiento>
-	</Alumno>
-	<Alumno>
-		<Id>2</Id>
-		<Nombre>Ana</Nombre>
-		<FechaNacimiento>2000-11-09</FechaNacimiento>
-	</Alumno>
+  <Alumno>
+    <Id>1</Id>
+    <Nombre>Pepe</Nombre>
+    <FechaNacimiento>2000-12-01</FechaNacimiento>
+  </Alumno>
+  <Alumno>
+    <Id>2</Id>
+    <Nombre>Ana</Nombre>
+    <FechaNacimiento>2000-11-09</FechaNacimiento>
+  </Alumno>
+  <Alumno>
+    <Id>89</Id>
+    <Nombre>Prueba</Nombre>
+    <FechaNacimiento>2022-04-08T09:43:46.7108912-03:00</FechaNacimiento>
+  </Alumno>
 </Alumnos>

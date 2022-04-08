@@ -29,5 +29,13 @@ namespace Instituto.Providers
             return XDocument.Load(uri);
         }
 
+        public void SaveDocument(XDocument documento, XMLEnum xmlKey)
+        {
+
+            string uri = $"{BasePath}{ConfigurationManager.AppSettings[mapper.GetKey(xmlKey)]}";
+
+            documento.Save(uri);
+        }
+
     }
 }
