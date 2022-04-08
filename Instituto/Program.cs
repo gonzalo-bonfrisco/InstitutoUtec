@@ -92,7 +92,8 @@ namespace Instituto
         public static string GetAlumnos(long id)
         {
 
-            InstitutoController controller = new InstitutoController();
+            // InstitutoController controller = new InstitutoController();
+            InstitutoXMLController controller = new InstitutoXMLController();
 
             var alumnos = controller.GetAlumnos(id);
 
@@ -102,7 +103,8 @@ namespace Instituto
 
         private static string GetMaterias()
         {
-            InstitutoController controller = new InstitutoController();
+            // InstitutoController controller = new InstitutoController();
+            InstitutoXMLController controller = new InstitutoXMLController();
 
             var materias = controller.GetMaterias();
             string resultado = string.Empty;
@@ -117,7 +119,8 @@ namespace Instituto
         public static string GetMaterias(long idAlumno)
         {
 
-            InstitutoController controller = new InstitutoController();
+            //InstitutoController controller = new InstitutoController();
+            InstitutoXMLController controller = new InstitutoXMLController();
 
             var materias = controller.GetMaterias(idAlumno);
 
@@ -140,10 +143,17 @@ namespace Instituto
         {
             string resultado = string.Empty;
 
-            alumnos.ForEach(a =>
+            if (alumnos != null)
             {
-                resultado += $"\n {a.ToString()}";
-            });
+                alumnos.ForEach(a =>
+                {
+                    resultado += $"\n {a.ToString()}";
+                });
+            }
+            else
+            {
+                resultado = "No se encontraron alumnos.";
+            }
 
             return resultado;
         }

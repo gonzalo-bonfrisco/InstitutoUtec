@@ -10,4 +10,9 @@
 		<Nombre>Matemáticas</Nombre>
 		<Alumnos>2</Alumnos>
 	</Materia>
+	<Materia>
+		<Id>3</Id>
+		<Nombre>Historia</Nombre>
+		<Alumnos></Alumnos>
+	</Materia>
 </Materias>

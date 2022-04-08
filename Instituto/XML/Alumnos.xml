@@ -7,7 +7,7 @@
 	</Alumno>
 	<Alumno>
 		<Id>2</Id>
-		<Nombre>Pepe</Nombre>
+		<Nombre>Ana</Nombre>
 		<FechaNacimiento>2000-11-09</FechaNacimiento>
 	</Alumno>
 </Alumnos>

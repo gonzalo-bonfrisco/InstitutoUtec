@@ -35,7 +35,7 @@ namespace Instituto.Controladores
 
         public List<Alumno> GetAlumnos(long idMateria)
         {
-            return Materias.FirstOrDefault(m => m.Id == idMateria).Alumnos;
+            return Materias.FirstOrDefault(m => m.Id == idMateria)?.Alumnos;
 
             #region CodigoComentado
             // return Materias.Where(m => m.Id == idMateria).Select(s=> s.Insciptos).FirstOrDefault();
