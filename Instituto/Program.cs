@@ -66,13 +66,11 @@ namespace Instituto
 
                         break;
                     case "5":
+                        CreateAlumno();
+                        break;
+                    case "6":
                         InstitutoXMLController controller = new InstitutoXMLController();
-                        controller.CreateAlumno(new Alumno()
-                        {
-                            Id = 89,
-                            Nombre = "Prueba",
-                            FechaNacimiento = DateTime.Now
-                        });
+                        controller.RemoveAlumno(89);
                         GoToMenu();
                         break;
                     default:
@@ -87,6 +85,18 @@ namespace Instituto
 
             Environment.Exit(0);
 
+        }
+
+        public static void CreateAlumno()
+        {
+            InstitutoXMLController controller = new InstitutoXMLController();
+            controller.CreateAlumno(new Alumno()
+            {
+                Id = 89,
+                Nombre = "Prueba",
+                FechaNacimiento = DateTime.Now
+            });
+            GoToMenu();
         }
 
         public static string GetAlumnos()
@@ -177,6 +187,7 @@ namespace Instituto
             Console.WriteLine("3 - Listado de Alumnos por Materia");
             Console.WriteLine("4 - Listado de Materias por Alumno");
             Console.WriteLine("5 - Nuevo Alumno");
+            Console.WriteLine("6 - Remove Alumno");
             Console.WriteLine("");
             Console.WriteLine("Ingrese una opción:");
             _opcion = Console.ReadLine();

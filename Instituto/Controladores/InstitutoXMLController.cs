@@ -88,5 +88,16 @@ namespace Instituto.Controladores
             provider.SaveDocument(document, XMLEnum.Alumnos);
         }
 
+        public void RemoveAlumno(long id)
+        {
+            var document = provider.GetDocument(XMLEnum.Alumnos);
+
+            document.Descendants("Alumno")
+                .FirstOrDefault(a => a.Element("Id").Value == id.ToString())
+                .Remove();
+
+            provider.SaveDocument(document, XMLEnum.Alumnos);
+        }
+
     }
 }
