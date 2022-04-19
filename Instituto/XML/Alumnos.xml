@@ -10,4 +10,9 @@
     <Nombre>Ana</Nombre>
     <FechaNacimiento>2000-11-09</FechaNacimiento>
   </Alumno>
+  <Alumno>
+    <Id>89</Id>
+    <Nombre>Prueba Modificacion</Nombre>
+    <FechaNacimiento>2022-01-01T00:00:00</FechaNacimiento>
+  </Alumno>
 </Alumnos>

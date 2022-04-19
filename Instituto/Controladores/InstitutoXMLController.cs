@@ -99,5 +99,19 @@ namespace Instituto.Controladores
             provider.SaveDocument(document, XMLEnum.Alumnos);
         }
 
+        public void UpdateAlumno(Alumno alumno)
+        {
+            var document = provider.GetDocument(XMLEnum.Alumnos);
+
+            var alumnoModifificar = document.Descendants("Alumno")
+                 .FirstOrDefault(a => a.Element("Id").Value == alumno.Id.ToString());
+
+            alumnoModifificar.SetElementValue("Nombre", alumno.Nombre);
+            alumnoModifificar.SetElementValue("FechaNacimiento", alumno.FechaNacimiento);
+
+            provider.SaveDocument(document, XMLEnum.Alumnos);
+
+        }
+
     }
 }

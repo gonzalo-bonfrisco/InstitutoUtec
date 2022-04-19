@@ -69,9 +69,10 @@ namespace Instituto
                         CreateAlumno();
                         break;
                     case "6":
-                        InstitutoXMLController controller = new InstitutoXMLController();
-                        controller.RemoveAlumno(89);
-                        GoToMenu();
+                        RemoveAlumno();
+                        break;
+                    case "7":
+                        UpdateAlumno();
                         break;
                     default:
 
@@ -95,6 +96,25 @@ namespace Instituto
                 Id = 89,
                 Nombre = "Prueba",
                 FechaNacimiento = DateTime.Now
+            });
+            GoToMenu();
+        }
+
+        public static void RemoveAlumno()
+        {
+            InstitutoXMLController controller = new InstitutoXMLController();
+            controller.RemoveAlumno(89);
+            GoToMenu();
+        }
+
+        public static void UpdateAlumno()
+        {
+            InstitutoXMLController controller = new InstitutoXMLController();
+            controller.UpdateAlumno(new Alumno()
+            {
+                Id = 89,
+                Nombre = "Prueba Modificacion",
+                FechaNacimiento = DateTime.Parse("2022-01-01")
             });
             GoToMenu();
         }
@@ -188,6 +208,7 @@ namespace Instituto
             Console.WriteLine("4 - Listado de Materias por Alumno");
             Console.WriteLine("5 - Nuevo Alumno");
             Console.WriteLine("6 - Remove Alumno");
+            Console.WriteLine("7 - Update Alumno");
             Console.WriteLine("");
             Console.WriteLine("Ingrese una opción:");
             _opcion = Console.ReadLine();
