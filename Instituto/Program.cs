@@ -2,216 +2,255 @@
 using System.Collections.Generic;
 using System;
 using Instituto.Entidades;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Instituto
 {
     class Program
     {
-        private static string _opcion = string.Empty;
+        private static IServiceProvider serviceProvider;
 
-        static void Main(string[] args)
+        private static void ConfigureServices()
         {
+            var services = new ServiceCollection();
+            services.AddLogging(configure => configure.AddConsole());
+            services.AddScoped<Startup>();
 
-            // string IdMateria = string.Empty;
 
-            Console.WriteLine("Bienvenidos al Instituto!");
-            GoToMenu();
+            serviceProvider = services.BuildServiceProvider(true);
+        }
 
-            while (_opcion != "exit")
+        private static void DisposeServices()
+        {
+            switch (serviceProvider)
             {
-
-                switch (_opcion)
-                {
-                    case "0":
-
-                        GoToMenu();
-
-                        break;
-                    case "1":
-
-                        Console.WriteLine(GetAlumnos());
-                        _opcion = Console.ReadLine();
-
-                        break;
-                    case "2":
-
-                        Console.WriteLine(GetMaterias());
-                        _opcion = Console.ReadLine();
-
-                        break;
-                    case "3":
-                        Console.WriteLine("Ingrese Id de Materia:");
-
-                        _opcion = Console.ReadLine();
-                        long id = long.Parse(_opcion);
-
-                        Console.WriteLine($"Listado de Alumnos de la Materia: {id}");
-
-                        Console.WriteLine(GetAlumnos(id));
-                        _opcion = Console.ReadLine();
-
-                        break;
-
-
-                    case "4":
-                        Console.WriteLine("Ingrese Id de Alumno:");
-
-                        _opcion = Console.ReadLine();
-                        long idAlumno = long.Parse(_opcion);
-
-                        Console.WriteLine($"Listado de Materias del Alumno: {idAlumno}");
-
-                        Console.WriteLine(GetMaterias(idAlumno));
-                        _opcion = Console.ReadLine();
-
-                        break;
-                    case "5":
-                        CreateAlumno();
-                        break;
-                    case "6":
-                        RemoveAlumno();
-                        break;
-                    case "7":
-                        UpdateAlumno();
-                        break;
-                    default:
-
-                        Console.Write("Opción inválida.");
-                        _opcion = Console.ReadLine();
-
-                        break;
-                }
-
+                case null:
+                    return;
+                case IDisposable disposable:
+                    disposable.Dispose();
+                    break;
             }
-
-            Environment.Exit(0);
-
         }
 
-        public static void CreateAlumno()
+        private static async Task Main()
         {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.CreateAlumno(new Alumno()
-            {
-                Id = 89,
-                Nombre = "Prueba",
-                FechaNacimiento = DateTime.Now
-            });
-            GoToMenu();
+            ConfigureServices();
+
+            // Do stuff...        
+
+            Console.ReadKey();
+
+            DisposeServices();
         }
 
-        public static void RemoveAlumno()
-        {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.RemoveAlumno(89);
-            GoToMenu();
-        }
+        //    private static string _opcion = string.Empty;
 
-        public static void UpdateAlumno()
-        {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.UpdateAlumno(new Alumno()
-            {
-                Id = 89,
-                Nombre = "Prueba Modificacion",
-                FechaNacimiento = DateTime.Parse("2022-01-01")
-            });
-            GoToMenu();
-        }
+        //    static void Main(string[] args)
+        //    {
 
-        public static string GetAlumnos()
-        {
+        //        // string IdMateria = string.Empty;
 
-            //InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
+        //        Console.WriteLine("Bienvenidos al Instituto!");
+        //        GoToMenu();
 
-            var alumnos = controller.GetAlumnos();
+        //        while (_opcion != "exit")
+        //        {
 
-            return PrintAlumnos(alumnos);
-        }
-        public static string GetAlumnos(long id)
-        {
+        //            switch (_opcion)
+        //            {
+        //                case "0":
 
-            // InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
+        //                    GoToMenu();
 
-            var alumnos = controller.GetAlumnos(id);
+        //                    break;
+        //                case "1":
 
-            return PrintAlumnos(alumnos);
-        }
+        //                    Console.WriteLine(GetAlumnos());
+        //                    _opcion = Console.ReadLine();
 
+        //                    break;
+        //                case "2":
 
-        private static string GetMaterias()
-        {
-            // InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
+        //                    Console.WriteLine(GetMaterias());
+        //                    _opcion = Console.ReadLine();
 
-            var materias = controller.GetMaterias();
-            string resultado = string.Empty;
+        //                    break;
+        //                case "3":
+        //                    Console.WriteLine("Ingrese Id de Materia:");
 
-            materias.ForEach(a =>
-            {
-                resultado += $"\n {a.ToString()}";
-            });
+        //                    _opcion = Console.ReadLine();
+        //                    long id = long.Parse(_opcion);
 
-            return resultado;
-        }
-        public static string GetMaterias(long idAlumno)
-        {
+        //                    Console.WriteLine($"Listado de Alumnos de la Materia: {id}");
 
-            //InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
+        //                    Console.WriteLine(GetAlumnos(id));
+        //                    _opcion = Console.ReadLine();
 
-            var materias = controller.GetMaterias(idAlumno);
-
-            return PrintMaterias(materias);
-        }
+        //                    break;
 
 
-        public static string PrintMaterias(List<Materia> materias)
-        {
-            string resultado = string.Empty;
+        //                case "4":
+        //                    Console.WriteLine("Ingrese Id de Alumno:");
 
-            materias.ForEach(a =>
-            {
-                resultado += $"\n {a.ToString()}";
-            });
+        //                    _opcion = Console.ReadLine();
+        //                    long idAlumno = long.Parse(_opcion);
 
-            return resultado;
-        }
-        public static string PrintAlumnos(List<Alumno> alumnos)
-        {
-            string resultado = string.Empty;
+        //                    Console.WriteLine($"Listado de Materias del Alumno: {idAlumno}");
 
-            if (alumnos != null)
-            {
-                alumnos.ForEach(a =>
-                {
-                    resultado += $"\n {a.ToString()}";
-                });
-            }
-            else
-            {
-                resultado = "No se encontraron alumnos.";
-            }
+        //                    Console.WriteLine(GetMaterias(idAlumno));
+        //                    _opcion = Console.ReadLine();
 
-            return resultado;
-        }
+        //                    break;
+        //                case "5":
+        //                    CreateAlumno();
+        //                    break;
+        //                case "6":
+        //                    RemoveAlumno();
+        //                    break;
+        //                case "7":
+        //                    UpdateAlumno();
+        //                    break;
+        //                default:
+
+        //                    Console.Write("Opción inválida.");
+        //                    _opcion = Console.ReadLine();
+
+        //                    break;
+        //            }
+
+        //        }
+
+        //        Environment.Exit(0);
+
+        //    }
+
+        //    public static void CreateAlumno()
+        //    {
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+        //        controller.CreateAlumno(new Alumno()
+        //        {
+        //            Id = 89,
+        //            Nombre = "Prueba",
+        //            FechaNacimiento = DateTime.Now
+        //        });
+        //        GoToMenu();
+        //    }
+
+        //    public static void RemoveAlumno()
+        //    {
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+        //        controller.RemoveAlumno(89);
+        //        GoToMenu();
+        //    }
+
+        //    public static void UpdateAlumno()
+        //    {
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+        //        controller.UpdateAlumno(new Alumno()
+        //        {
+        //            Id = 89,
+        //            Nombre = "Prueba Modificacion",
+        //            FechaNacimiento = DateTime.Parse("2022-01-01")
+        //        });
+        //        GoToMenu();
+        //    }
+
+        //    public static string GetAlumnos()
+        //    {
+
+        //        //InstitutoController controller = new InstitutoController();
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+
+        //        var alumnos = controller.GetAlumnos();
+
+        //        return PrintAlumnos(alumnos);
+        //    }
+        //    public static string GetAlumnos(long id)
+        //    {
+
+        //        // InstitutoController controller = new InstitutoController();
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+
+        //        var alumnos = controller.GetAlumnos(id);
+
+        //        return PrintAlumnos(alumnos);
+        //    }
 
 
-        private static void GoToMenu()
-        {
-            Console.WriteLine("Menú de opciones:");
-            Console.WriteLine("1 - Listado de Alumnos");
-            Console.WriteLine("2 - Listado de Materias");
-            Console.WriteLine("3 - Listado de Alumnos por Materia");
-            Console.WriteLine("4 - Listado de Materias por Alumno");
-            Console.WriteLine("5 - Nuevo Alumno");
-            Console.WriteLine("6 - Remove Alumno");
-            Console.WriteLine("7 - Update Alumno");
-            Console.WriteLine("");
-            Console.WriteLine("Ingrese una opción:");
-            _opcion = Console.ReadLine();
-        }
+        //    private static string GetMaterias()
+        //    {
+        //        // InstitutoController controller = new InstitutoController();
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+
+        //        var materias = controller.GetMaterias();
+        //        string resultado = string.Empty;
+
+        //        materias.ForEach(a =>
+        //        {
+        //            resultado += $"\n {a.ToString()}";
+        //        });
+
+        //        return resultado;
+        //    }
+        //    public static string GetMaterias(long idAlumno)
+        //    {
+
+        //        //InstitutoController controller = new InstitutoController();
+        //        InstitutoXMLController controller = new InstitutoXMLController();
+
+        //        var materias = controller.GetMaterias(idAlumno);
+
+        //        return PrintMaterias(materias);
+        //    }
+
+
+        //    public static string PrintMaterias(List<Materia> materias)
+        //    {
+        //        string resultado = string.Empty;
+
+        //        materias.ForEach(a =>
+        //        {
+        //            resultado += $"\n {a.ToString()}";
+        //        });
+
+        //        return resultado;
+        //    }
+        //    public static string PrintAlumnos(List<Alumno> alumnos)
+        //    {
+        //        string resultado = string.Empty;
+
+        //        if (alumnos != null)
+        //        {
+        //            alumnos.ForEach(a =>
+        //            {
+        //                resultado += $"\n {a.ToString()}";
+        //            });
+        //        }
+        //        else
+        //        {
+        //            resultado = "No se encontraron alumnos.";
+        //        }
+
+        //        return resultado;
+        //    }
+
+
+        //    private static void GoToMenu()
+        //    {
+        //        Console.WriteLine("Menú de opciones:");
+        //        Console.WriteLine("1 - Listado de Alumnos");
+        //        Console.WriteLine("2 - Listado de Materias");
+        //        Console.WriteLine("3 - Listado de Alumnos por Materia");
+        //        Console.WriteLine("4 - Listado de Materias por Alumno");
+        //        Console.WriteLine("5 - Nuevo Alumno");
+        //        Console.WriteLine("6 - Remove Alumno");
+        //        Console.WriteLine("7 - Update Alumno");
+        //        Console.WriteLine("");
+        //        Console.WriteLine("Ingrese una opción:");
+        //        _opcion = Console.ReadLine();
+        //    }
+        //}
     }
 }
