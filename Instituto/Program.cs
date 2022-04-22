@@ -3,47 +3,40 @@ using System.Collections.Generic;
 using System;
 using Instituto.Entidades;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Instituto
 {
     class Program
     {
-        private static IServiceProvider serviceProvider;
 
-        private static void ConfigureServices()
+        public static void Main()
         {
-            var services = new ServiceCollection();
-            services.AddLogging(configure => configure.AddConsole());
-            services.AddScoped<Startup>();
+            IServiceCollection serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
 
+            Application application = new Application(serviceCollection);
 
-            serviceProvider = services.BuildServiceProvider(true);
+            application.MakePayment("prueba");
+
+            Console.ReadLine();
+            // Run
+            // ...
         }
-
-        private static void DisposeServices()
+        static private void ConfigureServices(IServiceCollection serviceCollection)
         {
-            switch (serviceProvider)
+            ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
             {
-                case null:
-                    return;
-                case IDisposable disposable:
-                    disposable.Dispose();
-                    break;
-            }
+                builder.AddConsole();
+            });
+
+            serviceCollection.AddSingleton<ILoggerFactory>(loggerFactory);
         }
 
-        private static async Task Main()
-        {
-            ConfigureServices();
 
-            // Do stuff...        
-
-            Console.ReadKey();
-
-            DisposeServices();
-        }
+        ///--------------------------------------
 
         //    private static string _opcion = string.Empty;
 
