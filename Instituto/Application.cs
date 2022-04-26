@@ -16,22 +16,22 @@ namespace Instituto
 
         public ILogger Logger { get; set; }
         private readonly IAlumnoService alumnoService;
+        private readonly IMateriaService materiaService;
 
 
-        public Application(ILoggerFactory loggerFactory, IAlumnoService alumnoService)
+        public Application(ILoggerFactory loggerFactory, IAlumnoService alumnoService, IMateriaService materiaService)
         {
             Logger = loggerFactory?.CreateLogger<Application>();
             Logger.LogInformation("Application created successfully.");
 
             this.alumnoService = alumnoService;
+            this.materiaService = materiaService;
         }
 
         private static string _opcion = string.Empty;
 
         public void Inicio()
         {
-
-            // string IdMateria = string.Empty;
 
             Console.WriteLine("Bienvenidos al Instituto!");
             GoToMenu();
@@ -109,7 +109,6 @@ namespace Instituto
 
         public void CreateAlumno()
         {
-            //  InstitutoXMLController controller = new InstitutoXMLController();
             this.alumnoService.CreateAlumno(new Alumno()
             {
                 Id = 89,
@@ -119,17 +118,16 @@ namespace Instituto
             GoToMenu();
         }
 
-        public static void RemoveAlumno()
+        public void RemoveAlumno()
         {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.RemoveAlumno(89);
+            this.alumnoService.RemoveAlumno(89);
             GoToMenu();
         }
 
-        public static void UpdateAlumno()
+        public void UpdateAlumno()
         {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.UpdateAlumno(new Alumno()
+
+            this.alumnoService.UpdateAlumno(new Alumno()
             {
                 Id = 89,
                 Nombre = "Prueba Modificacion",
@@ -138,34 +136,26 @@ namespace Instituto
             GoToMenu();
         }
 
-        public static string GetAlumnos()
+        public string GetAlumnos()
         {
 
-            //InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
-
-            var alumnos = controller.GetAlumnos();
+            var alumnos = alumnoService.GetAlumnos();
 
             return PrintAlumnos(alumnos);
         }
-        public static string GetAlumnos(long id)
+        public string GetAlumnos(long id)
         {
 
-            // InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
-
-            var alumnos = controller.GetAlumnos(id);
+            var alumnos = alumnoService.GetAlumnos(id);
 
             return PrintAlumnos(alumnos);
         }
 
 
-        private static string GetMaterias()
+        private string GetMaterias()
         {
-            // InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
 
-            var materias = controller.GetMaterias();
+            var materias = materiaService.GetMaterias();
             string resultado = string.Empty;
 
             materias.ForEach(a =>
@@ -175,19 +165,16 @@ namespace Instituto
 
             return resultado;
         }
-        public static string GetMaterias(long idAlumno)
+        public string GetMaterias(long idAlumno)
         {
 
-            //InstitutoController controller = new InstitutoController();
-            InstitutoXMLController controller = new InstitutoXMLController();
-
-            var materias = controller.GetMaterias(idAlumno);
+            var materias = materiaService.GetMaterias(idAlumno);
 
             return PrintMaterias(materias);
         }
 
 
-        public static string PrintMaterias(List<Materia> materias)
+        public string PrintMaterias(List<Materia> materias)
         {
             string resultado = string.Empty;
 
@@ -198,7 +185,7 @@ namespace Instituto
 
             return resultado;
         }
-        public static string PrintAlumnos(List<Alumno> alumnos)
+        public string PrintAlumnos(List<Alumno> alumnos)
         {
             string resultado = string.Empty;
 
@@ -218,7 +205,7 @@ namespace Instituto
         }
 
 
-        private static void GoToMenu()
+        private void GoToMenu()
         {
             Console.WriteLine("Menú de opciones:");
             Console.WriteLine("1 - Listado de Alumnos");

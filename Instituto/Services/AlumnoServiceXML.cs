@@ -13,10 +13,14 @@ namespace Instituto.Services
     class AlumnoServiceXML : IAlumnoService
     {
         private readonly IXMLProvider provider;
+        private readonly IGetMateriaService getMateriaService;
+        private readonly IGetAlumnoService getAlumnoService;
 
-        public AlumnoServiceXML(IXMLProvider provider)
+        public AlumnoServiceXML(IXMLProvider provider, IGetMateriaService getMateriaService, IGetAlumnoService getAlumnoService)
         {
             this.provider = provider;
+            this.getMateriaService = getMateriaService;
+            this.getAlumnoService = getAlumnoService;
         }
 
         public void CreateAlumno(Alumno alumno)
@@ -35,22 +39,37 @@ namespace Instituto.Services
 
         public List<Alumno> GetAlumnos()
         {
-            throw new NotImplementedException();
+            return this.getAlumnoService.GetAlumnos();
         }
 
         public List<Alumno> GetAlumnos(long idMateria)
         {
-            throw new NotImplementedException();
+            return this.getMateriaService.GetMaterias().FirstOrDefault(m => m.Id == idMateria)?.Alumnos;
         }
 
         public void RemoveAlumno(long id)
         {
-            throw new NotImplementedException();
+            var document = provider.GetDocument(XMLEnum.Alumnos);
+
+            document.Descendants("Alumno")
+                .FirstOrDefault(a => a.Element("Id").Value == id.ToString())
+                .Remove();
+
+            provider.SaveDocument(document, XMLEnum.Alumnos);
         }
 
         public void UpdateAlumno(Alumno alumno)
         {
-            throw new NotImplementedException();
+            var document = provider.GetDocument(XMLEnum.Alumnos);
+
+            var alumnoModifificar = document.Descendants("Alumno")
+                 .FirstOrDefault(a => a.Element("Id").Value == alumno.Id.ToString());
+
+            alumnoModifificar.SetElementValue("Nombre", alumno.Nombre);
+            alumnoModifificar.SetElementValue("FechaNacimiento", alumno.FechaNacimiento);
+
+            provider.SaveDocument(document, XMLEnum.Alumnos);
+
         }
     }
 }

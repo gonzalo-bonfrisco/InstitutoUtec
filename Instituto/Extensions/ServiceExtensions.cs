@@ -13,8 +13,11 @@ namespace Instituto.Extensions
     {
         public static IServiceCollection ConfigureAppServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IAlumnoService, AlumnoServiceXML>();
             serviceCollection.AddScoped<IXMLProvider, XMLProvider>();
+            serviceCollection.AddScoped<IAlumnoService, AlumnoServiceXML>();
+            serviceCollection.AddScoped<IMateriaService, MateriaServiceXML>();
+            serviceCollection.AddScoped<IGetMateriaService, GetMateriaService>();
+            serviceCollection.AddScoped<IGetAlumnoService, GetAlumnosService>();
 
             return serviceCollection;
         }
