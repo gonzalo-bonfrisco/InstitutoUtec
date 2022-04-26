@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Instituto.Providers
 {
-    public class XMLProvider
+    public class XMLProvider : IXMLProvider
     {
         private string BasePath = string.Empty;
         private XMLMapper mapper;

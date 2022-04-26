@@ -1,4 +1,5 @@
-﻿using Instituto.Services;
+﻿using Instituto.Providers;
+using Instituto.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace Instituto.Extensions
     {
         public static IServiceCollection ConfigureAppServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IAlumnoService, AlumnoService>();
-            // serviceCollection.AddSingleton<IPaymentService, PaymentService>();
+            serviceCollection.AddScoped<IAlumnoService, AlumnoServiceXML>();
+            serviceCollection.AddScoped<IXMLProvider, XMLProvider>();
 
             return serviceCollection;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Instituto.Services
 {
-    internal interface IAlumnoService
+    public interface IAlumnoService
     {
         List<Alumno> GetAlumnos();
         List<Alumno> GetAlumnos(long idMateria);

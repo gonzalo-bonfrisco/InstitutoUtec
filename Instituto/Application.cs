@@ -15,30 +15,16 @@ namespace Instituto
     {
 
         public ILogger Logger { get; set; }
+        private readonly IAlumnoService alumnoService;
 
 
-        public Application(ILoggerFactory loggerFactory)
+        public Application(ILoggerFactory loggerFactory, IAlumnoService alumnoService)
         {
             Logger = loggerFactory?.CreateLogger<Application>();
-
             Logger.LogInformation("Application created successfully.");
+
+            this.alumnoService = alumnoService;
         }
-
-
-
-        //public void MakePayment(string paymentDetails)
-        //{
-        //    Logger.LogInformation(
-        //      $"Begin making a payment { paymentDetails }");
-        //    IPaymentService paymentService =
-        //      Services.GetRequiredService<IPaymentService>();
-
-        //    Logger.LogInformation(paymentService.Hola());
-        //    // ...
-        //}
-
-
-
 
         private static string _opcion = string.Empty;
 
@@ -121,10 +107,10 @@ namespace Instituto
 
         }
 
-        public static void CreateAlumno()
+        public void CreateAlumno()
         {
-            InstitutoXMLController controller = new InstitutoXMLController();
-            controller.CreateAlumno(new Alumno()
+            //  InstitutoXMLController controller = new InstitutoXMLController();
+            this.alumnoService.CreateAlumno(new Alumno()
             {
                 Id = 89,
                 Nombre = "Prueba",

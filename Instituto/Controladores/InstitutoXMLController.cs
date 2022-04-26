@@ -74,19 +74,19 @@ namespace Instituto.Controladores
             return this.GetMaterias().Where(m => m.Alumnos.Any(a => a.Id == idAlumno)).ToList();
         }
 
-        public void CreateAlumno(Alumno alumno)
-        {
-            var document = provider.GetDocument(XMLEnum.Alumnos);
+        //public void CreateAlumno(Alumno alumno)
+        //{
+        //    var document = provider.GetDocument(XMLEnum.Alumnos);
 
-            document.Root.Add(new XElement("Alumno",
-                                   new XElement("Id", alumno.Id),
-                                   new XElement("Nombre", alumno.Nombre),
-                                   new XElement("FechaNacimiento", alumno.FechaNacimiento)
-                             )
-            );
+        //    document.Root.Add(new XElement("Alumno",
+        //                           new XElement("Id", alumno.Id),
+        //                           new XElement("Nombre", alumno.Nombre),
+        //                           new XElement("FechaNacimiento", alumno.FechaNacimiento)
+        //                     )
+        //    );
 
-            provider.SaveDocument(document, XMLEnum.Alumnos);
-        }
+        //    provider.SaveDocument(document, XMLEnum.Alumnos);
+        //}
 
         public void RemoveAlumno(long id)
         {
