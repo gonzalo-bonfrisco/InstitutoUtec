@@ -7,8 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instituto", "Instituto\Inst
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{AF6304D1-3389-4A0B-9052-37C561EC92AE}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Desktop\InstitutoScript.sql = ..\..\..\..\Desktop\InstitutoScript.sql
-		..\..\..\..\Desktop\IntitutoBDCreate.sql = ..\..\..\..\Desktop\IntitutoBDCreate.sql
+		Scripts\InstitutoScript.sql = Scripts\InstitutoScript.sql
+		Scripts\IntitutoBDCreate.sql = Scripts\IntitutoBDCreate.sql
 	EndProjectSection
 EndProject
 Global
