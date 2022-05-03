@@ -35,5 +35,23 @@ namespace InstitutoApi.Controllers
             var alumnos = getAlumnoService.GetAlumnos();
             return alumnoMapper.MapToResponse(alumnos);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AlumnoRequest request)
+        {
+            try
+            {
+                string s = "a";
+
+                throw new Exception("ss");
+
+                return Created("pppp", 1);
+            }
+            catch (Exception)
+            {
+                return Problem("Problema interno.", "Create alumno", StatusCodes.Status500InternalServerError);
+            }
+        }
+
     }
 }
