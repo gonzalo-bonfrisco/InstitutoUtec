@@ -23,7 +23,13 @@ namespace InstitutoApi.Controllers
             this.alumnoMapper = alumnoMapper;
         }
 
+        /// <summary>
+        /// Este metodo retorna la lista de todos los alumnos existentes en el sistema
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Retorna lista de alumnos</response>
         [HttpGet]
+        [Produces("application/json")]
         public List<AlumnoResponse> Get()
         {
             var alumnos = getAlumnoService.GetAlumnos();
