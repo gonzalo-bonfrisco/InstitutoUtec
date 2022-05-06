@@ -11,7 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{AF63
 		Scripts\IntitutoBDCreate.sql = Scripts\IntitutoBDCreate.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstitutoApi", "InstitutoApi\InstitutoApi.csproj", "{B18EFFB0-A4C1-4889-A23C-4060EF2727EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstitutoApi", "InstitutoApi\InstitutoApi.csproj", "{B18EFFB0-A4C1-4889-A23C-4060EF2727EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentacion", "Documentacion", "{A0F8DB95-7000-4047-A5EC-BBB1E7C4DD98}"
+	ProjectSection(SolutionItems) = preProject
+		Migrations.md = Migrations.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
