@@ -6,5 +6,6 @@ namespace InstitutoApi.Services
     public interface IGetAlumnoService
     {
         List<Alumno> GetAlumnos();
+        void Createalumno(Alumno alumno);
     }
 }

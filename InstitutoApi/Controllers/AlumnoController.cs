@@ -1,5 +1,6 @@
 ﻿using InstitutoApi.Dto;
 using InstitutoApi.Dto.Mappers;
+using InstitutoApi.Modelo.Entidades;
 using InstitutoApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,9 +42,11 @@ namespace InstitutoApi.Controllers
         {
             try
             {
-                string s = "a";
-
-                throw new Exception("ss");
+                getAlumnoService.Createalumno(new Alumno()
+                {
+                    Nombre = "Prueba",
+                    FechaNacimiento = DateTime.Now
+                });
 
                 return Created("pppp", 1);
             }
