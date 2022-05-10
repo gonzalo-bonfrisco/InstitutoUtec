@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace InstitutoApi.Dto
 {
     public class AlumnoResponse
     {
+        public long Id { get; set; }
         /// <summary>
         /// Nombre del alumno
         /// </summary>

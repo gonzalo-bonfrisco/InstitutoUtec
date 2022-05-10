@@ -12,6 +12,7 @@ namespace InstitutoApi.Dto.Mappers
         {
             return new AlumnoResponse()
             {
+                Id = alumno.Id,
                 Nombre = alumno.Nombre,
                 FechaNacimiento = alumno.FechaNacimiento
             };
@@ -27,6 +28,15 @@ namespace InstitutoApi.Dto.Mappers
             }
 
             return response;
+        }
+
+        public Alumno MapToEntity(AlumnoRequest request)
+        {
+            return new Alumno()
+            {
+                Nombre = request.Nombre,
+                FechaNacimiento = request.FechaNacimiento
+            };
         }
     }
 }

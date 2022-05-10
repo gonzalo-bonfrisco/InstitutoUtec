@@ -1,5 +1,6 @@
 ﻿using InstitutoApi.Data;
 using InstitutoApi.Modelo.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,15 @@ namespace InstitutoApi.Services
             _context = context;
         }
 
-        public void Createalumno(Alumno alumno)
+        public async Task<Alumno> GetAlumno(long id)
         {
-            _context.Alumnos.Add(alumno);
-            _context.SaveChanges();
+            return await _context.Alumnos.FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public List<Alumno> GetAlumnos()
+        public async Task<List<Alumno>> GetAlumnos()
         {
-            return _context.Alumnos.ToList();
+            return await _context.Alumnos.ToListAsync();
         }
+
     }
 }

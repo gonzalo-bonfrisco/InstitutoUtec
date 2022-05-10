@@ -7,5 +7,7 @@ namespace InstitutoApi.Dto.Mappers
     {
         AlumnoResponse MapToResponse(Alumno alumno);
         List<AlumnoResponse> MapToResponse(List<Alumno> alumnos);
+
+        Alumno MapToEntity(AlumnoRequest request);
     }
 }

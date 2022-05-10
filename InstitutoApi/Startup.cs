@@ -49,6 +49,7 @@ namespace InstitutoApi
 
             services.AddScoped<IGetAlumnoService, GetAlumnoService>();
             services.AddScoped<IAlumnoMapper, AlumnoMapper>();
+            services.AddScoped<IAlumnoService, AlumnoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
