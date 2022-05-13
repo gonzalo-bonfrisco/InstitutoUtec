@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentacion", "Documentac
 		Migrations.md = Migrations.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{1F82BEBE-71D3-40A7-B5B0-EEB090754E8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{B18EFFB0-A4C1-4889-A23C-4060EF2727EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B18EFFB0-A4C1-4889-A23C-4060EF2727EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B18EFFB0-A4C1-4889-A23C-4060EF2727EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F82BEBE-71D3-40A7-B5B0-EEB090754E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F82BEBE-71D3-40A7-B5B0-EEB090754E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F82BEBE-71D3-40A7-B5B0-EEB090754E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F82BEBE-71D3-40A7-B5B0-EEB090754E8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
