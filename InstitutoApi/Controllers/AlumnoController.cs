@@ -4,6 +4,7 @@ using InstitutoApi.Modelo.Entidades;
 using InstitutoApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,15 +17,18 @@ namespace InstitutoApi.Controllers
     [ApiController]
     public class AlumnoController : ControllerBase
     {
+        private readonly ILogger<AlumnoController> _logger;
+
         private readonly IGetAlumnoService _getAlumnoService;
         private readonly IAlumnoMapper _alumnoMapper;
         private readonly IAlumnoService _alumnoService;
 
-        public AlumnoController(IGetAlumnoService getAlumnoService, IAlumnoMapper alumnoMapper, IAlumnoService alumnoService)
+        public AlumnoController(IGetAlumnoService getAlumnoService, IAlumnoMapper alumnoMapper, IAlumnoService alumnoService, ILogger<AlumnoController> logger)
         {
             this._getAlumnoService = getAlumnoService;
             this._alumnoMapper = alumnoMapper;
             _alumnoService = alumnoService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -160,10 +164,13 @@ namespace InstitutoApi.Controllers
 
                 await _alumnoService.RemoveAlumno(id);
 
+                _logger.LogInformation($"Alumno: {id}, eliminado correctamente! ");
+
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al remover alumno");
                 return Problem("Problema interno.", "Remove alumno", StatusCodes.Status500InternalServerError);
             }
 
