@@ -15,10 +15,12 @@ namespace InstitutoApi.Dto
         /// <example>Juan del Castillo Vega</example>
         [Required(ErrorMessage = "El campo nombre no puede ser vacío")]
         public string Nombre { get; set; }
+
         /// <summary>
         /// Fecha de nacimiento del alumno
         /// </summary>
         [FechaNacimientoValidation]
+        [Required(ErrorMessage = "El campo nombre no puede ser vacío")]
         public DateTime FechaNacimiento { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,8 +82,15 @@ namespace InstitutoApi.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Crea un alumno a partir de los datos provistos
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <response code="201"></response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AlumnoResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Create([FromBody] AlumnoRequest request)
         {
             try
@@ -99,6 +107,68 @@ namespace InstitutoApi.Controllers
                 return Problem("Problema interno.", "Create alumno", StatusCodes.Status500InternalServerError);
             }
         }
+
+        /// <summary>
+        ///  Actualiza los datos de un alumno a partir de la información provista
+        /// </summary>
+        /// <param name="id"> Identificador interno del alumno</param>
+        /// <param name="request"> Datos a actualizar del alumno</param>
+        /// <returns> El alumno modificado.</returns>
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlumnoResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Update(long id, [FromBody] AlumnoRequest request)
+        {
+            try
+            {
+                if (!await _alumnoService.AnyAlumno(id))
+                    return Problem(detail: $"No existe alumno con el id {id}"
+                                    , statusCode: StatusCodes.Status404NotFound
+                                    , title: "Error de validación");
+
+                var alumno = _alumnoMapper.MapToEntity(request);
+                alumno.Id = id;
+
+                await _alumnoService.UpdateAlumno(alumno);
+
+                return Ok(_alumnoMapper.MapToResponse(await _getAlumnoService.GetAlumno(id)));
+            }
+            catch (Exception)
+            {
+                return Problem("Problema interno.", "update alumno", StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        /// <summary>
+        ///  Remueve el alumno del sistema
+        /// </summary>
+        /// <param name="id"> Identificador interno del alumno</param>
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlumnoResponse))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Remove([Required(ErrorMessage = "Id requerido")] long id)
+        {
+            try
+            {
+                if (!await _alumnoService.AnyAlumno(id))
+                    return Problem(detail: $"No existe alumno con el id {id}"
+                                    , statusCode: StatusCodes.Status404NotFound
+                                    , title: "Error de validación");
+
+                await _alumnoService.RemoveAlumno(id);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Problem("Problema interno.", "Remove alumno", StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
 
     }
 }
