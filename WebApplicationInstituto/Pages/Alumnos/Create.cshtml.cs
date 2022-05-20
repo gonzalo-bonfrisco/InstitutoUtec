@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using WebApplicationInstituto.ApiServices;
 using WebApplicationInstituto.Models;
 
 namespace WebApplicationInstituto.Pages.Alumnos
 {
     public class CreateModel : PageModel
     {
-        // private readonly WebApplicationInstituto.Data.WebApplicationInstitutoContext _context;
+        private readonly IApiInstitutoClient _apiInstitutoClient;
 
-        public CreateModel()
+        public CreateModel(IApiInstitutoClient apiInstitutoClient)
         {
-            // _context = context;
+            _apiInstitutoClient = apiInstitutoClient;
         }
 
         public IActionResult OnGet()
@@ -35,8 +35,8 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return Page();
             }
 
-            //_context.Alumno.Add(Alumno);
-            //await _context.SaveChangesAsync();
+            await _apiInstitutoClient.CreateAlumno(Alumno);
+
 
             return RedirectToPage("./Index");
         }
