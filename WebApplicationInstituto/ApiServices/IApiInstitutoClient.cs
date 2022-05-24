@@ -9,5 +9,7 @@ namespace WebApplicationInstituto.ApiServices
     {
         Task<List<Alumno>> GetAlumnos();
         Task<OperationResult> CreateAlumno(Alumno alumno);
+        Task<Alumno> GetAlumno(long id);
+        Task<OperationResult> RemoveAlumno(long id);
     }
 }

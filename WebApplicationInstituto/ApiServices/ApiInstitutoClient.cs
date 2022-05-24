@@ -13,18 +13,18 @@ namespace WebApplicationInstituto.ApiServices
     public class ApiInstitutoClient : IApiInstitutoClient
     {
         private readonly HttpClient _httpClient;
+        private readonly Uri _route;
 
         public ApiInstitutoClient(IHttpClientFactory factory)
         {
             this._httpClient = factory.CreateClient("ApiInstitutoClient");
-
+            this._route = new Uri($"{_httpClient.BaseAddress}Alumno");
         }
 
         public async Task<List<Alumno>> GetAlumnos()
         {
-            Uri uri = new Uri($"{_httpClient.BaseAddress}Alumno");
 
-            var responseString = await _httpClient.GetStringAsync(uri);
+            var responseString = await _httpClient.GetStringAsync(_route);
 
             var alumnos = JsonConvert.DeserializeObject<List<Alumno>>(responseString);
 
@@ -33,16 +33,13 @@ namespace WebApplicationInstituto.ApiServices
 
         public async Task<OperationResult> CreateAlumno(Alumno alumno)
         {
-            Uri uri = new Uri($"{_httpClient.BaseAddress}Alumno");
 
             var jsonInString = JsonConvert.SerializeObject(alumno);
 
-            var response = await _httpClient.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+            var response = await _httpClient.PostAsync(_route, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
 
             var result = new OperationResult();
 
-
-            var a = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
                 result.IsSuccess = false;
@@ -52,5 +49,33 @@ namespace WebApplicationInstituto.ApiServices
             return result;
 
         }
+
+        public async Task<Alumno> GetAlumno(long id)
+        {
+
+            var response = await _httpClient.GetAsync($"{ _route}/{id}");
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return JsonConvert.DeserializeObject<Alumno>(await response.Content.ReadAsStringAsync());
+
+        }
+
+        public async Task<OperationResult> RemoveAlumno(long id)
+        {
+            var response = await _httpClient.DeleteAsync($"{ _route}/{id}");
+
+            var result = new OperationResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                result.IsSuccess = false;
+                result.problemDetail = JsonConvert.DeserializeObject<ProblemDetail>(await response.Content.ReadAsStringAsync());
+            }
+
+            return result;
+        }
+
     }
 }

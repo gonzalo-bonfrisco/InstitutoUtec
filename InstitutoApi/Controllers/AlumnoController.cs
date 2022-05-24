@@ -60,7 +60,7 @@ namespace InstitutoApi.Controllers
         /// <response code="200"></response>
         /// <response code="400">Error de validación.</response> 
         /// <response code="404">No encontrado.</response> 
-        [HttpGet("GetById")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlumnoResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -150,7 +150,7 @@ namespace InstitutoApi.Controllers
         /// </summary>
         /// <param name="id"> Identificador interno del alumno</param>
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlumnoResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Remove([Required(ErrorMessage = "Id requerido")] long id)

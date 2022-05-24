@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-
+using WebApplicationInstituto.ApiServices;
 using WebApplicationInstituto.Models;
 
 namespace WebApplicationInstituto.Pages.Alumnos
 {
     public class DeleteModel : PageModel
     {
-        // private readonly WebApplicationInstituto.Data.WebApplicationInstitutoContext _context;
+        private readonly IApiInstitutoClient _apiInstitutoClient;
 
-        public DeleteModel()
+        public DeleteModel(IApiInstitutoClient apiInstitutoClient)
         {
-            // _context = context;
+            _apiInstitutoClient = apiInstitutoClient;
         }
 
         [BindProperty]
@@ -29,12 +29,13 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return NotFound();
             }
 
-            Alumno = null;//await _context.Alumno.FirstOrDefaultAsync(m => m.Id == id);
+            Alumno = await _apiInstitutoClient.GetAlumno((long)id);
 
             if (Alumno == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -45,13 +46,23 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return NotFound();
             }
 
-            Alumno = null;//await _context.Alumno.FindAsync(id);
+            Alumno = await _apiInstitutoClient.GetAlumno((long)id);
 
-            if (Alumno != null)
+            if (Alumno == null)
+                return NotFound();
+
+            var resultado = await _apiInstitutoClient.RemoveAlumno((long)id);
+
+            if (!resultado.IsSuccess)
             {
-                //_context.Alumno.Remove(Alumno);
-                //await _context.SaveChangesAsync();
+                foreach (string key in resultado.problemDetail.Errors.Keys)
+                {
+                    ModelState.AddModelError(string.Empty, resultado.problemDetail.Errors[key].FirstOrDefault());
+                }
+
+                return Page();
             }
+
 
             return RedirectToPage("./Index");
         }

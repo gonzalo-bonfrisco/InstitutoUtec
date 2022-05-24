@@ -35,8 +35,17 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return Page();
             }
 
-            await _apiInstitutoClient.CreateAlumno(Alumno);
+            var resultado = await _apiInstitutoClient.CreateAlumno(Alumno);
 
+            if (!resultado.IsSuccess)
+            {
+                foreach (string key in resultado.problemDetail.Errors.Keys)
+                {
+                    ModelState.AddModelError(string.Empty, resultado.problemDetail.Errors[key].FirstOrDefault());
+                }
+
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }
