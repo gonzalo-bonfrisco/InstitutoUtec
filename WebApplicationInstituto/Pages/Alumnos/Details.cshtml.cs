@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-
+using WebApplicationInstituto.ApiServices;
 using WebApplicationInstituto.Models;
 
 namespace WebApplicationInstituto.Pages.Alumnos
 {
     public class DetailsModel : PageModel
     {
-        //private readonly WebApplicationInstituto.Data.WebApplicationInstitutoContext _context;
+        private readonly IApiInstitutoClient _apiInstitutoClient;
 
-        public DetailsModel()
+        public DetailsModel(IApiInstitutoClient apiInstitutoClient)
         {
-            //_context = context;
+            _apiInstitutoClient = apiInstitutoClient;
         }
 
         public Alumno Alumno { get; set; }
@@ -28,7 +28,7 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return NotFound();
             }
 
-            Alumno = null;// await _context.Alumno.FirstOrDefaultAsync(m => m.Id == id);
+            Alumno = await _apiInstitutoClient.GetAlumno((long)id);
 
             if (Alumno == null)
             {
