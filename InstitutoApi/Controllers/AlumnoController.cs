@@ -118,11 +118,11 @@ namespace InstitutoApi.Controllers
         /// <param name="id"> Identificador interno del alumno</param>
         /// <param name="request"> Datos a actualizar del alumno</param>
         /// <returns> El alumno modificado.</returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlumnoResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Update(long id, [FromBody] AlumnoRequest request)
+        public async Task<IActionResult> Update([Required(ErrorMessage = "Id requerido")] long id, [FromBody] AlumnoRequest request)
         {
             try
             {

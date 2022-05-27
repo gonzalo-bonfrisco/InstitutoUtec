@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using WebApplicationInstituto.ApiServices;
 using WebApplicationInstituto.Models;
 
 namespace WebApplicationInstituto.Pages.Alumnos
 {
     public class EditModel : PageModel
     {
-        //private readonly WebApplicationInstituto.Data.WebApplicationInstitutoContext _context;
+        private readonly IApiInstitutoClient _apiInstitutoClient;
 
-        public EditModel()
+        public EditModel(IApiInstitutoClient apiInstitutoClient)
         {
-            //_context = context;
+            _apiInstitutoClient = apiInstitutoClient;
         }
 
         [BindProperty]
@@ -30,7 +30,7 @@ namespace WebApplicationInstituto.Pages.Alumnos
                 return NotFound();
             }
 
-            Alumno = null;// await _context.Alumno.FirstOrDefaultAsync(m => m.Id == id);
+            Alumno = await _apiInstitutoClient.GetAlumno((long)id);
 
             if (Alumno == null)
             {
@@ -43,36 +43,26 @@ namespace WebApplicationInstituto.Pages.Alumnos
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            // _context.Attach(Alumno).State = EntityState.Modified;
+            var resultado = await _apiInstitutoClient.UpdateAlumno(Alumno);
 
-            try
+            if (!resultado.IsSuccess)
             {
-                // await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AlumnoExists(Alumno.Id))
+                foreach (string key in resultado.problemDetail.Errors.Keys)
                 {
-                    return NotFound();
+                    ModelState.AddModelError(string.Empty, resultado.problemDetail.Errors[key].FirstOrDefault());
                 }
-                else
-                {
-                    throw;
-                }
+
+                return Page();
             }
 
             return RedirectToPage("./Index");
         }
 
-        private bool AlumnoExists(long id)
-        {
-            return true;
-            // return _context.Alumno.Any(e => e.Id == id);
-        }
     }
 }

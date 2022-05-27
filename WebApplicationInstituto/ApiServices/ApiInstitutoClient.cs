@@ -31,6 +31,18 @@ namespace WebApplicationInstituto.ApiServices
             return alumnos;
         }
 
+        public async Task<Alumno> GetAlumno(long id)
+        {
+
+            var response = await _httpClient.GetAsync($"{ _route}/{id}");
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return JsonConvert.DeserializeObject<Alumno>(await response.Content.ReadAsStringAsync());
+
+        }
+
         public async Task<OperationResult> CreateAlumno(Alumno alumno)
         {
 
@@ -50,15 +62,22 @@ namespace WebApplicationInstituto.ApiServices
 
         }
 
-        public async Task<Alumno> GetAlumno(long id)
+        public async Task<OperationResult> UpdateAlumno(Alumno alumno)
         {
 
-            var response = await _httpClient.GetAsync($"{ _route}/{id}");
+            var jsonInString = JsonConvert.SerializeObject(alumno);
+
+            var response = await _httpClient.PutAsync($"{ _route}/{alumno.Id}", new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+
+            var result = new OperationResult();
 
             if (!response.IsSuccessStatusCode)
-                return null;
+            {
+                result.IsSuccess = false;
+                result.problemDetail = JsonConvert.DeserializeObject<ProblemDetail>(await response.Content.ReadAsStringAsync());
+            }
 
-            return JsonConvert.DeserializeObject<Alumno>(await response.Content.ReadAsStringAsync());
+            return result;
 
         }
 

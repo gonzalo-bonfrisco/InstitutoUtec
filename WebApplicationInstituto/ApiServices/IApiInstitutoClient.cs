@@ -8,8 +8,9 @@ namespace WebApplicationInstituto.ApiServices
     public interface IApiInstitutoClient
     {
         Task<List<Alumno>> GetAlumnos();
-        Task<OperationResult> CreateAlumno(Alumno alumno);
         Task<Alumno> GetAlumno(long id);
+        Task<OperationResult> CreateAlumno(Alumno alumno);
+        Task<OperationResult> UpdateAlumno(Alumno alumno);
         Task<OperationResult> RemoveAlumno(long id);
     }
 }
