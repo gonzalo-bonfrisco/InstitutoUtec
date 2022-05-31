@@ -37,7 +37,7 @@ namespace InstitutoApi.Health
                 {
                     await connection.OpenAsync(cancellationToken);
 
-
+                    //throw new Exception("roto");
                     if (TestQuery != null)
                     {
                         var command = connection.CreateCommand();

@@ -62,7 +62,7 @@ namespace InstitutoApi
                     "OrderingDB-check",
                     new SqlConnectionHealthCheck(Configuration["DbContextSettings:ConnectionString"]),
                     HealthStatus.Unhealthy,
-                    new string[] { "SELECT version()" });
+                    new string[] { "Comprobación BD" });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
