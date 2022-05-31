@@ -25,6 +25,8 @@ namespace InstitutoApi.Validations
                 return new ValidationResult($"El campo {validationContext.DisplayName} no presenta el formato correcto.");
             }
 
+            //  string codigoAgente = validationContext.ObjectInstance.GetType().GetProperty(_codigoAgenteProperty).GetValue(validationContext.ObjectInstance, null)?.ToString();
+            //   var tenantProvider = validationContext.GetService(typeof(ITenantProvider)) as ITenantProvider;
 
         }
     }

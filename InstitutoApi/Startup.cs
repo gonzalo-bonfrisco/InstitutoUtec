@@ -1,13 +1,17 @@
+using HealthChecks.UI.Client;
 using InstitutoApi.Data;
 using InstitutoApi.Dto.Mappers;
+using InstitutoApi.Health;
 using InstitutoApi.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -50,6 +54,15 @@ namespace InstitutoApi
             services.AddScoped<IGetAlumnoService, GetAlumnoService>();
             services.AddScoped<IAlumnoMapper, AlumnoMapper>();
             services.AddScoped<IAlumnoService, AlumnoService>();
+
+            // Registers required services for health checks
+            services.AddHealthChecks()
+                // Add a health check for a SQL Server database
+                .AddCheck(
+                    "OrderingDB-check",
+                    new SqlConnectionHealthCheck(Configuration["DbContextSettings:ConnectionString"]),
+                    HealthStatus.Unhealthy,
+                    new string[] { "SELECT version()" });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +84,14 @@ namespace InstitutoApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //endpoints.MapHealthChecks("/hc");
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    // Predicate = check => check.Tags.Contains("readiness"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
             });
         }
     }
