@@ -3,21 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplicationInstituto.Dto;
+using WebApplicationInstituto.Handlers;
 using WebApplicationInstituto.Models;
 
 namespace WebApplicationInstituto.ApiServices
 {
     public class ApiInstitutoClient : IApiInstitutoClient
     {
-        private readonly HttpClient _httpClient;
-        private readonly Uri _route;
 
-        public ApiInstitutoClient(IHttpClientFactory factory)
+        private readonly Uri _route;
+        private readonly IHttpApiClientHandler _httpClient;
+
+        public ApiInstitutoClient(IHttpApiClientHandler httpApiClientHandler, IApiSecurity apiSecurity)
         {
-            this._httpClient = factory.CreateClient("ApiInstitutoClient");
+            this._httpClient = httpApiClientHandler;
+
             this._route = new Uri($"{_httpClient.BaseAddress}Alumno");
         }
 

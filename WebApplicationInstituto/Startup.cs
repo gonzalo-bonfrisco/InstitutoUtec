@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using WebApplicationInstituto.ApiServices;
+using WebApplicationInstituto.Handlers;
 
 namespace WebApplicationInstituto
 {
@@ -28,10 +29,13 @@ namespace WebApplicationInstituto
         {
             services.AddRazorPages();
 
-            //services.AddHttpClient<ApiInstitutoClient>(c => c.BaseAddress = new System.Uri("https://localhost:44351/api/"));
             services.AddHttpClient("ApiInstitutoClient", c => c.BaseAddress = new System.Uri("https://localhost:44351/api/"));
 
             services.AddScoped<IApiInstitutoClient, ApiInstitutoClient>();
+            services.AddSingleton<IApiSecurity, ApiSecurity>();
+            services.AddScoped<IHttpApiClientHandler, HttpApiClientHandler>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
