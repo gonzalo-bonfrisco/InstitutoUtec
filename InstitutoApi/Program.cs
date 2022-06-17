@@ -40,6 +40,7 @@ namespace InstitutoApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://*:5000"); //Add this line para que funcione con docker https://georgestocker.com/2017/01/31/fix-for-asp-net-core-docker-service-not-being-exposed-on-host/
                 })
                 .ConfigureLogging(logging =>
                 {
@@ -47,5 +48,6 @@ namespace InstitutoApi
                     logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
                 .UseNLog();  // NLog: Setup NLog for Dependency injection;
+                
     }
 }
