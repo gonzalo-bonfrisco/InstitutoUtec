@@ -1,0 +1,2 @@
+Parado sobre el directorio raiz de la solución correr el siguiente comando para hacr build del contenedor
+C:\Users\gonzalo.bonfrisco\source\utec\Clases2022\Instituto>docker build -f InstitutoApi\Dockerfile --force-rm -t institutoapi .
