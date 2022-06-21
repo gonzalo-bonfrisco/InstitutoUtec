@@ -16,3 +16,37 @@
 2022-06-17 12:33:49.9683 Info Adding target FileTarget(Name=ownFile-web)
 2022-06-17 12:33:49.9683 Info Adding target ConsoleTarget(Name=lifetimeConsole)
 2022-06-17 12:33:50.0236 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=/app/bin/Debug/net5.0/NLog.config
+2022-06-21 09:13:38.0214 Info Message Template Auto Format enabled
+2022-06-21 09:13:38.0380 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-21 09:13:38.1090 Info Adding target FileTarget(Name=allfile)
+2022-06-21 09:13:38.1090 Info Adding target FileTarget(Name=ownFile-web)
+2022-06-21 09:13:38.1090 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2022-06-21 09:13:38.1595 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=C:\Users\gonzalo.bonfrisco\source\utec\Clases2022\Instituto\InstitutoApi\bin\Debug\net5.0\NLog.config
+2022-06-21 09:13:38.1905 Info Configuration initialized.
+2022-06-21 09:13:38.1905 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2022-06-21 09:13:42.2408 Info AppDomain Shutting down. Logger closing...
+2022-06-21 09:13:42.2662 Info Logger has been shut down.
+2022-06-21 12:26:17.9889 Info Message Template Auto Format enabled
+2022-06-21 12:26:18.0176 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-21 12:26:18.1623 Info Adding target FileTarget(Name=allfile)
+2022-06-21 12:26:18.2021 Info Adding target FileTarget(Name=ownFile-web)
+2022-06-21 12:26:18.2212 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2022-06-21 12:26:18.2963 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=/app/bin/Debug/net5.0/NLog.config
+2022-06-21 09:27:38.7465 Info Message Template Auto Format enabled
+2022-06-21 09:27:38.9504 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-21 09:27:39.1354 Info Adding target FileTarget(Name=allfile)
+2022-06-21 09:27:39.1684 Info Adding target FileTarget(Name=ownFile-web)
+2022-06-21 09:27:39.1751 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2022-06-21 09:27:39.3490 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=C:\Users\gonzalo.bonfrisco\source\utec\Clases2022\Instituto\InstitutoApi\bin\Debug\net5.0\NLog.config
+2022-06-21 12:30:31.9441 Info Message Template Auto Format enabled
+2022-06-21 12:30:31.9827 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-21 12:30:32.1019 Info Adding target FileTarget(Name=allfile)
+2022-06-21 12:30:32.1256 Info Adding target FileTarget(Name=ownFile-web)
+2022-06-21 12:30:32.1363 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2022-06-21 12:30:32.2112 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=/app/bin/Debug/net5.0/NLog.config
+2022-06-21 12:42:21.9154 Info Message Template Auto Format enabled
+2022-06-21 12:42:21.9704 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-21 12:42:22.1329 Info Adding target FileTarget(Name=allfile)
+2022-06-21 12:42:22.1629 Info Adding target FileTarget(Name=ownFile-web)
+2022-06-21 12:42:22.1877 Info Adding target ConsoleTarget(Name=lifetimeConsole)
+2022-06-21 12:42:22.2882 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=60, FilePath=/app/bin/Debug/net5.0/NLog.config
