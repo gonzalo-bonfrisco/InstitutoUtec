@@ -38,3 +38,19 @@ Run docker run -d -p 5000:5000 --name myapp institutoapi:latest
 
 Los contenedores trabajan en red para cominucarse 
 Referencia: https://www.returngis.net/2020/12/como-funcionan-las-redes-en-docker/
+
+
+
+GUARDAR EN DOCKER HUB para posterior uso
+ crear local tag: 
+ 
+ docker tag institutoapi gbonfrisco/utec:version1.0   ---> gbonfrisco/utec (Repositorio en docker hub creado previamente)
+
+ Push del tag al hub
+
+ docker push gbonfrisco/utec:version1.0
+
+
+ EJEMPLO de publicación en AZURE
+ https://faun.pub/deploying-a-docker-container-in-azure-56249038603d
+
