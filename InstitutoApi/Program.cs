@@ -37,13 +37,12 @@ namespace InstitutoApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-           
+
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //webBuilder.UseUrls("http://*:5000,https://*:5001"); //Add this line para que funcione con docker https://georgestocker.com/2017/01/31/fix-for-asp-net-core-docker-service-not-being-exposed-on-host/
                 })
-           
+
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
@@ -51,6 +50,6 @@ namespace InstitutoApi
                 })
                 .UseNLog();  // NLog: Setup NLog for Dependency injection;
 
-                
+
     }
 }
