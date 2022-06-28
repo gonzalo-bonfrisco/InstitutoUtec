@@ -139,10 +139,13 @@ namespace InstitutoApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "InstitutoApi v1"));
+
             }
 
+            // Quitamos estas lineas de swagger de IsDevelopment para que corra en la publicación en modo Relase en el contenedor
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "InstitutoApi v1"));
+            //--
             app.UseHttpsRedirection();
 
             app.UseRouting();
